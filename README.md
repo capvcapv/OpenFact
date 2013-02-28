@@ -24,3 +24,5 @@ siendo una alternativa factible. asequible y libre para las pymes Mexicanas.
 
 Nota: La aplicacion aun no esta completa, falta modulo de facturacion y validaciones en los formularios, trabajaré 
 en ello. :)
+
+Contacto: lord_capv@hotmail.com
