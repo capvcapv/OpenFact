@@ -1,4 +1,8 @@
 OpenFact
+
+Programa de facturacion CBB que pretende cumplir con las disposiciones de SAT,
+siendo una alternativa factible. asequible y libre para las pymes Mexicanas.
+
     Autor: Carlos Alberto Palacios Vargas
 ========
     This program is free software; you can redistribute it and/or modify
