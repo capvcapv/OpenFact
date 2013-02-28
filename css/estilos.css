@@ -1,0 +1,49 @@
+html{
+	 height: 100%; 
+	}
+body{
+	height: 100%;
+	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	}
+#contenedor{
+	height: 100%;
+	margin:0px auto;
+	}
+#panelIzquierdo{
+	border: 1px solid #aaaaaa;
+	width: 200px;
+	height: 90%;
+	padding: 10px;
+	float: left;
+	}
+#panelDerecho{
+	border: 1px solid #aaaaaa;
+	padding: 10px;
+	height: 90%;
+	margin-left: 225px;
+	}	
+#cabezera{
+	text-align: center;
+	}
+#cuerpo{
+	height: 95%;
+	}
+#pie{
+	height: 5%;
+	text-align: center;
+	font-size: 9px;
+	font-weight: normal;
+	}
+.ui-menu { 
+	width: 150px; 
+	font-size: 15px;
+	}
+.formulario label input { display:block; }
+.formulario input.text { margin-bottom:12px; width:95%; padding: .4em; }
+.formulario{font-size: 62.5%;}
+fieldset { padding:0; border:0; margin-top:0px; }
+.validateTips { border: 1px solid transparent; padding: 0.3em; }
+.ui-dialog .ui-state-error { padding: .3em; }
+#formularioFolios{
+	text-align: center;
+	}
