@@ -102,7 +102,7 @@
             close:function(event,ui){
               $.getJSON('<?=base_url()?>index.php/productos/producto/'+$(tProducto).val(),function(data){
                   $.each(data,function(key,val){
-                    
+                    hola
                     tUnitario.append(val['precio1']);
                   });
               })
