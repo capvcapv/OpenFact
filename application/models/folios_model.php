@@ -1,4 +1,5 @@
-<?
+<? if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 class Folios_model extends CI_Model {
 		
 		var $serie;

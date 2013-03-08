@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link href="<?=base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
-    <script src="<?=base_url()?>js/jquery-1.8.3.js"></script>
-    <script src="<?=base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
-    <script src="<?=base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
+    <link href="<?php echo base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+    <script src="<?php echo base_url()?>js/jquery-1.8.3.js"></script>
+    <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
+    <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
     <style type="text/css" title="currentStyle">
-      @import "<?=base_url()?>media/css/demo_table_jui.css";
+      @import "<?php echo base_url()?>media/css/demo_table_jui.css";
       #toolbar {
         padding: 2px 2px;
         font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
@@ -43,7 +43,7 @@
           modal: true,
           buttons:{
             "Crear":function(){
-              $.post('<?=base_url()?>index.php/clientes/guarda',{razonSocial:$('#razonSocial').val(),rfc:$('#rfc').val(),calle:$('#calle').val(),numInt:$('#numInt').val(),numExt:$('#numExt').val(),colonia:$('#colonia').val(),cp:$('#cp').val(),municipio:$('#municipio').val(),estado:$('#estado').val(),pais:$('#pais').val(),correoElectronico:$('#correoElectronico').val(),telefono:$('#telefono').val(),porcentajeIVA:$('#porcentajeIVA').val(),porcentajeIEPS:$('#porcentajeIEPS').val(),porcentajeRetISR:$('#porcentajeRetISR').val(),porcentajeRetIVA:$('#porcentajeRetIVA').val()},function() {
+              $.post('<?php echo base_url()?>index.php/clientes/guarda',{razonSocial:$('#razonSocial').val(),rfc:$('#rfc').val(),calle:$('#calle').val(),numInt:$('#numInt').val(),numExt:$('#numExt').val(),colonia:$('#colonia').val(),cp:$('#cp').val(),municipio:$('#municipio').val(),estado:$('#estado').val(),pais:$('#pais').val(),correoElectronico:$('#correoElectronico').val(),telefono:$('#telefono').val(),porcentajeIVA:$('#porcentajeIVA').val(),porcentajeIEPS:$('#porcentajeIEPS').val(),porcentajeRetISR:$('#porcentajeRetISR').val(),porcentajeRetIVA:$('#porcentajeRetIVA').val()},function() {
                   poblarTabla();
                 });
               $(this).dialog('close');
@@ -61,7 +61,7 @@
           modal: true,
           buttons:{
             "Guardar":function(){
-              $.post('<?=base_url()?>index.php/clientes/actualiza',{id:$('#codigoActualiza').html(),razonSocial:$('#razonSocialActualiza').val(),rfc:$('#rfcActualiza').val(),calle:$('#calleActualiza').val(),numInt:$('#numIntActualiza').val(),numExt:$('#numExtActualiza').val(),colonia:$('#coloniaActualiza').val(),cp:$('#cpActualiza').val(),municipio:$('#municipioActualiza').val(),estado:$('#estadoActualiza').val(),pais:$('#paisActualiza').val(),correoElectronico:$('#correoElectronicoActualiza').val(),telefono:$('#telefonoActualiza').val(),porcentajeIVA:$('#porcentajeIVAActualiza').val(),porcentajeIEPS:$('#porcentajeIEPSActualiza').val(),porcentajeRetISR:$('#porcentajeRetISRActualiza').val(),porcentajeRetIVA:$('#porcentajeRetIVAActualiza').val()},function() {
+              $.post('<?php echo base_url()?>index.php/clientes/actualiza',{id:$('#codigoActualiza').html(),razonSocial:$('#razonSocialActualiza').val(),rfc:$('#rfcActualiza').val(),calle:$('#calleActualiza').val(),numInt:$('#numIntActualiza').val(),numExt:$('#numExtActualiza').val(),colonia:$('#coloniaActualiza').val(),cp:$('#cpActualiza').val(),municipio:$('#municipioActualiza').val(),estado:$('#estadoActualiza').val(),pais:$('#paisActualiza').val(),correoElectronico:$('#correoElectronicoActualiza').val(),telefono:$('#telefonoActualiza').val(),porcentajeIVA:$('#porcentajeIVAActualiza').val(),porcentajeIEPS:$('#porcentajeIEPSActualiza').val(),porcentajeRetISR:$('#porcentajeRetISRActualiza').val(),porcentajeRetIVA:$('#porcentajeRetIVAActualiza').val()},function() {
                   poblarTabla();
                 });
               $(this).dialog('close');
@@ -89,7 +89,7 @@
         $('#tabla').on('dblclick','tr',function(){
           var data=$('#tabla').dataTable().fnGetData(this);
           limpiaFormulario();
-          $.getJSON('<?=base_url()?>index.php/clientes/cliente/'+data[0],function(data){
+          $.getJSON('<?php echo base_url()?>index.php/clientes/cliente/'+data[0],function(data){
             
             $.each(data, function(key, val){ 
               $('#codigoActualiza').empty();
@@ -118,7 +118,7 @@
         poblarTabla();
 
         function poblarTabla(){
-          $.getJSON('<?=base_url()?>index.php/clientes/todos', function(data) {
+          $.getJSON('<?php echo base_url()?>index.php/clientes/todos', function(data) {
             $('#tabla').dataTable().fnClearTable();
             $.each(data, function(key, val) {
               $('#tabla').dataTable().fnAddData([val['id'],val['razonSocial'],val['rfc']]);

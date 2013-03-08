@@ -2,28 +2,28 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<link href="<?=base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
-    <script src="<?=base_url()?>js/jquery-1.8.3.js"></script>
-    <script src="<?=base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
-    <script src="<?=base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
-    <script src="<?=base_url()?>js/AjaxUpload.2.0.min.js"></script>
-    <script src="<?=base_url()?>js/formatinf.js"></script>
-    <script src="<?=base_url()?>js/grid.js"></script>
-    <script src="<?=base_url()?>js/version.js"></script>
-    <script src="<?=base_url()?>js/detector.js"></script>
-    <script src="<?=base_url()?>js/errorlevel.js"></script>
-    <script src="<?=base_url()?>js/bitmat.js"></script>
-    <script src="<?=base_url()?>js/datablock.js"></script>
-    <script src="<?=base_url()?>js/bmparser.js"></script>
-    <script src="<?=base_url()?>js/datamask.js"></script>
-    <script src="<?=base_url()?>js/rsdecoder.js"></script>
-    <script src="<?=base_url()?>js/gf256poly.js"></script>
-    <script src="<?=base_url()?>js/gf256.js"></script>
-    <script src="<?=base_url()?>js/decoder.js"></script>
-    <script src="<?=base_url()?>js/QRCode.js"></script>
-    <script src="<?=base_url()?>js/findpat.js"></script>
-    <script src="<?=base_url()?>js/alignpat.js"></script>
-    <script src="<?=base_url()?>js/databr.js"></script>
+	<link href="<?php echo base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+    <script src="<?php echo base_url()?>js/jquery-1.8.3.js"></script>
+    <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
+    <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
+    <script src="<?php echo base_url()?>js/AjaxUpload.2.0.min.js"></script>
+    <script src="<?php echo base_url()?>js/formatinf.js"></script>
+    <script src="<?php echo base_url()?>js/grid.js"></script>
+    <script src="<?php echo base_url()?>js/version.js"></script>
+    <script src="<?php echo base_url()?>js/detector.js"></script>
+    <script src="<?php echo base_url()?>js/errorlevel.js"></script>
+    <script src="<?php echo base_url()?>js/bitmat.js"></script>
+    <script src="<?php echo base_url()?>js/datablock.js"></script>
+    <script src="<?php echo base_url()?>js/bmparser.js"></script>
+    <script src="<?php echo base_url()?>js/datamask.js"></script>
+    <script src="<?php echo base_url()?>js/rsdecoder.js"></script>
+    <script src="<?php echo base_url()?>js/gf256poly.js"></script>
+    <script src="<?php echo base_url()?>js/gf256.js"></script>
+    <script src="<?php echo base_url()?>js/decoder.js"></script>
+    <script src="<?php echo base_url()?>js/QRCode.js"></script>
+    <script src="<?php echo base_url()?>js/findpat.js"></script>
+    <script src="<?php echo base_url()?>js/alignpat.js"></script>
+    <script src="<?php echo base_url()?>js/databr.js"></script>
     <style type="text/css">
 
         #toolbar {

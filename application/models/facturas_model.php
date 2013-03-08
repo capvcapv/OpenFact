@@ -6,12 +6,6 @@ class Facturas_model extends CI_Model {
 	var $folio;
 	var $cliente;
 	var $fecha;
-	var $subtotal;
-	var $importeIVA;
-	var $importeIEPS;
-	var $importeRetIVA;
-	var $importeRetIEPS;
-	var $total;
 	var $metodoPago;
 	var $condicionesPago;
 	var $cuentaPago;
@@ -47,12 +41,6 @@ class Facturas_model extends CI_Model {
 		$this->db->set('folio',$this->folio);
 		$this->db->set('cliente',$this->cliente);
 		$this->db->set('fecha',$this->fecha);
-		$this->db->set('subtotal',$this->subtotal);
-		$this->db->set('importeIVA',$this->importeIVA);
-		$this->db->set('importeIEPS',$this->importeIEPS);
-		$this->db->set('importeRetIVA',$this->importeRetIVA);
-		$this->db->set('importeRetISR',$this->importeRetISR);
-		$this->db->set('total',$this->total);
 		$this->db->set('metodoPago',$this->metodoPago);
 		$this->db->set('condicionesPago',$this->condicionesPago);
 		$this->db->set('cuentaPago',$this->cuentaPago);

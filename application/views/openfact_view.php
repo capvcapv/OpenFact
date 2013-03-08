@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<link href="<?=base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
-    <script src="<?=base_url()?>js/jquery-1.8.3.js"></script>
-    <script src="<?=base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
-    <script src="<?=base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
+	<link href="<?php echo base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+    <script src="<?php echo base_url()?>js/jquery-1.8.3.js"></script>
+    <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
+    <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
     <style type="text/css">
 
         #toolbar {
@@ -64,6 +64,9 @@
         $('#btnEmpresa').button().click(function(){
           $('#formulario').dialog('open');
         });
+        $('#btnSucursales').button().click(function(){
+          location.href='http://localhost/OpenFact/index.php/sucursales'
+        });
 
         $.getJSON('http://localhost/OpenFact/index.php/empresas/busca', function(data) {
            
@@ -104,6 +107,7 @@
         <button id="btnFacturas">Facturas</button>
         <button id="btnFolios">Folios</button>
         <button id="btnEmpresa">Mi empresa</button>
+        <button id="btnSucursales">Sucursales</button>
       </div>
     </div>
     <div class="cuerpo">

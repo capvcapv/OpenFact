@@ -2,14 +2,13 @@
 <html lang='es'>
   <head>
     <meta charset="utf-8">
-    <link href="<?=base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
-    <script src="<?=base_url()?>js/jquery-1.8.3.js"></script>
-    <script src="<?=base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
+    <link href="<?php echo base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+    <script src="<?php echo base_url()?>js/jquery-1.8.3.js"></script>
+    <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
     <style type="text/css" title="currentStyle">
     
     body { font-size: 62.5%; }
-    label, input { display:block; }
-
+    
     #toolbar {
       padding: 2px 2px;
       font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
@@ -79,7 +78,7 @@
       });
 
       function agregarMovimiento(){
-        $('#movimientos').append("<tr><th width='10%'><input class='cantidad' type='number'/></th><th width='30%'><input class='movimiento' STYLE='WIDTH:100%' type='text'/></th><th class='unitario' width='10%'></th><th width='10%' ></th><th width='10%'></th><th width='10%'></th><th width='10%'></th><th class='total' width='10%'></th><th class='eliminar' width='10%'>Eliminar</th> </tr>");
+        $('#movimientos').append("<tr><th width='10%'><input class='cantidad' type='number'/></th><th width='30%'><input class='movimiento' STYLE='WIDTH:100%' type='text'/></th><th class='unitario' width='10%'></th><th class='total' width='10%'></th><th class='eliminar' width='10%'>Eliminar</th> </tr>");
         var tProducto=$('#movimientos').find('tr:last .movimiento');
         var tCantidad=$('#movimientos').find('tr:last .cantidad');
         var tTotal=$('#movimientos').find('tr:last .total');
@@ -102,7 +101,7 @@
             close:function(event,ui){
               $.getJSON('<?=base_url()?>index.php/productos/producto/'+$(tProducto).val(),function(data){
                   $.each(data,function(key,val){
-                    hola
+                    
                     tUnitario.append(val['precio1']);
                   });
               })
@@ -154,29 +153,34 @@
     </div>    
     
     <div class="ui-widget" id='cliente'>
-      <label>Cliente:</label>
-      <input id='buscaCliente'/>
-    </div>
-    <br>
-    <div id='domicilio'>
-      Datos de la empresa:
-    </div>
-    <br>
+      <label>Cliente:</label><br>
+      <input id='buscaCliente'/><button id='nuevoCliente'>+</button>
+      <br><br>
+      <div id='domicilio'>
+        Datos de la empresa:
+      </div>
+      <br>
+      <label>Lugar de expedición:</label><br>
+      <input id='lugarExpedicion'/><button id='nuevoSucursal'>+</button> <br>
+      <label>Método de pago:</label><br>
+      <input id='metodoPago'/><br>
+      <label>Condiciones de pago:</label><br>
+      <input id='condicionesPago' /> 
+      <label>Num. de cuenta:</label>
+      <input id='numCuenta'/><br><br>
+   </div>
+
     <div id='movimientos_fact' class='ui-widget'>
       <button id="agregarMovimiento">Agregar</button>
       <br>
       <table id="users" class="ui-widget ui-widget-content">
         <thead>
           <tr class="ui-widget-header ">
-            <th width='5%'>Cantidad</th>
-            <th width='30%'>Producto</th>
+            <th width='10%'>Cantidad</th>
+            <th width='60%'>Producto</th>
             <th width='10%'>Precio Unitario</th>
-            <th width='10%' >IVA</th>
-            <th width='10%'>IEPS</th>
-            <th width='10%'>Ret IVA</th>
-            <th width='10%'>Ret ISR</th>
             <th width='10%'>Total</th>
-            <th width='5%'></th>
+            <th width='10%'></th>
           </tr>
         </thead>
         <tbody id='movimientos'>

@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link href="<?=base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
-    <script src="<?=base_url()?>js/jquery-1.8.3.js"></script>
-    <script src="<?=base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
-    <script src="<?=base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
+    <link href="<?php echo base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+    <script src="<?php echo base_url()?>js/jquery-1.8.3.js"></script>
+    <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
+    <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
     <style type="text/css" title="currentStyle">
-      @import "<?=base_url()?>media/css/demo_table_jui.css";
+      @import "<?php echo base_url()?>media/css/demo_table_jui.css";
       #toolbar {
         padding: 2px 2px;
         font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
@@ -29,7 +29,7 @@
       .validateTips { border: 1px solid transparent; padding: 0.3em; }
       .ui-dialog .ui-state-error { padding: .3em; }
     </style>
-    <script type="text/javascript" language="javascript" src="<?=base_url()?>media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url()?>media/js/jquery.dataTables.js"></script>
 
 
     <script type="text/javascript">
@@ -43,7 +43,7 @@
           modal: true,
           buttons:{
             "Crear":function(){
-              $.post('<?=base_url()?>index.php/productos/guarda',{codigo:$('#codigo').val(),nombre:$('#nombre').val(),descripcion:$('#descripcion').val(),precio1:$('#precio1').val(),precio2:$('#precio2').val(),unidad:$('#unidad').val(),porcentajeIVA:$('#porcentajeIVA').val(),porcentajeIEPS:$('#porcentajeIEPS').val(),porcentajeRetISR:$('#porcentajeRetISR').val(),porcentajeRetIVA:$('#porcentajeRetIVA').val()},function() {
+              $.post('<?php echo base_url()?>index.php/productos/guarda',{codigo:$('#codigo').val(),nombre:$('#nombre').val(),descripcion:$('#descripcion').val(),precio1:$('#precio1').val(),precio2:$('#precio2').val(),unidad:$('#unidad').val(),porcentajeIVA:$('#porcentajeIVA').val(),porcentajeIEPS:$('#porcentajeIEPS').val(),porcentajeRetISR:$('#porcentajeRetISR').val(),porcentajeRetIVA:$('#porcentajeRetIVA').val()},function() {
                   poblarTabla();
                 });
               $(this).dialog('close');
@@ -61,7 +61,7 @@
           modal: true,
           buttons:{
             "Guardar":function(){
-              $.post('<?=base_url()?>index.php/productos/actualiza',{id:$('#idActualiza').html(),codigo:$('#codigoActualiza').val(),nombre:$('#nombreActualiza').val(),descripcion:$('#descripcionActualiza').val(),precio1:$('#precio1Actualiza').val(),precio2:$('#precio2Actualiza').val(),unidad:$('#unidadActualiza').val(),porcentajeIVA:$('#porcentajeIVAActualiza').val(),porcentajeIEPS:$('#porcentajeIEPSActualiza').val(),porcentajeRetISR:$('#porcentajeRetISRActualiza').val(),porcentajeRetIVA:$('#porcentajeRetIVAActualiza').val()},function() {
+              $.post('<?php echo base_url()?>index.php/productos/actualiza',{id:$('#idActualiza').html(),codigo:$('#codigoActualiza').val(),nombre:$('#nombreActualiza').val(),descripcion:$('#descripcionActualiza').val(),precio1:$('#precio1Actualiza').val(),precio2:$('#precio2Actualiza').val(),unidad:$('#unidadActualiza').val(),porcentajeIVA:$('#porcentajeIVAActualiza').val(),porcentajeIEPS:$('#porcentajeIEPSActualiza').val(),porcentajeRetISR:$('#porcentajeRetISRActualiza').val(),porcentajeRetIVA:$('#porcentajeRetIVAActualiza').val()},function() {
                   poblarTabla();
                 });
               $(this).dialog('close');
@@ -89,7 +89,7 @@
         $('#tabla').on('dblclick','tr',function(){
           var data=$('#tabla').dataTable().fnGetData(this);
           limpiaFormulario();
-          $.getJSON('<?=base_url()?>index.php/productos/producto/'+data[0],function(data){
+          $.getJSON('<?php echo base_url()?>index.php/productos/producto/'+data[0],function(data){
             
             $.each(data, function(key, val){ 
               $('#idActualiza').append(val['id']);
@@ -111,7 +111,7 @@
         poblarTabla();
 
         function poblarTabla(){
-          $.getJSON('<?=base_url()?>index.php/productos/todos', function(data) {
+          $.getJSON('<?php echo base_url()?>index.php/productos/todos', function(data) {
             $('#tabla').dataTable().fnClearTable();
             $.each(data, function(key, val) {
               $('#tabla').dataTable().fnAddData([val['codigo'],val['nombre'],val['precio1']]);

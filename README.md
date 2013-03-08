@@ -1,5 +1,7 @@
 OpenFact
 
+"Si tú tienes una manzana y yo tengo una manzana y las intercambiamos, entonces ambos aún tendremos una manzana. Pero si tú tienes una idea y yo tengo una idea y las intercambiamos, entonces ambos tendremos dos ideas."
+
 Programa de facturacion CBB que pretende cumplir con las disposiciones de SAT,
 siendo una alternativa factible. asequible y libre para las pymes Mexicanas.
 

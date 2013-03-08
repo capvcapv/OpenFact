@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <link href="<?=base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
-  <script src="<?=base_url()?>js/jquery-1.8.3.js"></script>
-  <script src="<?=base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
-  <script src="<?=base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
+  <link href="<?php echo base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+  <script src="<?php echo base_url()?>js/jquery-1.8.3.js"></script>
+  <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
+  <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
   <style type="text/css" title="currentStyle">
-    @import "<?=base_url()?>media/css/demo_table_jui.css";
+    @import "<?php echo base_url()?>media/css/demo_table_jui.css";
     #toolbar {
       padding: 2px 2px;
       font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
@@ -30,7 +30,7 @@
     .validateTips { border: 1px solid transparent; padding: 0.3em; }
     .ui-dialog .ui-state-error { padding: .3em; }
   </style>
-    <script type="text/javascript" language="javascript" src="<?=base_url()?>media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url()?>media/js/jquery.dataTables.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function($) {
