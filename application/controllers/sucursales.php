@@ -4,7 +4,7 @@ class Sucursales extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('sucusales_view');
+		$this->load->view('sucursales_view');
 	}
 
 	public function guarda(){
@@ -16,17 +16,20 @@ class Sucursales extends CI_Controller {
 
 	public function todos($pNombre=''){
 		$this->load->model('Sucursales_model');
-		echo json_encode($this->Sucursales_model->todos($pNombre));
+		$res=$this->Sucursales_model->todos($pNombre);
+		echo json_encode($res->result());
 	}
 
 	public function sucursal($pId){
 		$this->load->model('Sucursales_model');
 		$this->Sucursales_model->id=$pId;
-		echo json_encode($this->Sucursales_model->obtiene());
+		$res=$this->Sucursales_model->obtiene();
+		echo json_encode($res->result());
 	}
 
 	public function actualiza(){
 		$this->load->model('Sucursales_model');
+		$this->Sucursales_model->id=$this->input->post('id');
 		$this->Sucursales_model->nombre=$this->input->post('nombre');
 		$this->Sucursales_model->domicilio=$this->input->post('domicilio');
 		$this->Sucursales_model->actualiza();

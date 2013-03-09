@@ -11,7 +11,7 @@ class Sucursales_model extends CI_Model {
 	}
 
 	public function todos($pNombre=''){
-		$this->db->select('nombre,domiclio');
+		$this->db->select('id,nombre,domicilio');
 		$this->db->like('nombre',$pNombre);
 		return $this->db->get('Sucursales');
 	}
@@ -28,9 +28,8 @@ class Sucursales_model extends CI_Model {
 	}
 
 	public function actualiza(){
-		$this->db->set('nombre',$this->nombre);
-		$this->db->set('domicilio',$this->domicilio);
-		$this->db->update('Sucursales');
+		$this->db->where('id', $this->id);
+		$this->db->update('Sucursales',$this);
 	}
 
 }
