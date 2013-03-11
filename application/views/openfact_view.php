@@ -106,8 +106,8 @@
         <button id="btnUnidades">Unidades</button>
         <button id="btnFacturas">Facturas</button>
         <button id="btnFolios">Folios</button>
-        <button id="btnEmpresa">Mi empresa</button>
         <button id="btnSucursales">Sucursales</button>
+        <button id="btnEmpresa">Mi empresa</button>
       </div>
     </div>
     <div class="cuerpo">

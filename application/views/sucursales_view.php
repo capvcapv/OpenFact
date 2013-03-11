@@ -133,7 +133,7 @@
       <table id='tabla' width=100%>
         <thead>
           <tr>
-            <th width='10%'>Id</th>
+            <th width='10%'>Codigo</th>
             <th width='20%'>Nombre</th>
             <th width='70%'>Domicilio</th>
           </tr>
@@ -142,7 +142,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <th width='10%'>Id</th>
+            <th width='10%'>Codigo</th>
             <th width='20%'>Nombre</th>
             <th width='70%'>Domicilio</th>
           </tr>

@@ -19,7 +19,7 @@
         font-size: 80%;
         margin:10px 30px;
       }
-      #formulario label input { display:block; }
+      #formulario label input{ display:block; }
       #formulario input.text { margin-bottom:12px; width:95%; padding: .4em; }
       #formularioActualiza label input { display:block; }
       #formularioActualiza input.text { margin-bottom:12px; width:95%; padding: .4em; }
@@ -74,6 +74,7 @@
 
         $('#nuevo').button({icons:{primary: "ui-icon-plusthick"}}).click(function(){
           limpiaFormulario();
+          rellenaUnidades();
           $('#formulario').dialog('open');
         });
 
@@ -98,7 +99,7 @@
               $('#descripcionActualiza').val(val['descripcion']);
               $('#precio1Actualiza').val(val['precio1']);
               $('#precio2Actualiza').val(val['precio2']);
-              $('#unidadActualiza').val(val['unidad']);
+              $('#unidadActualiza').append('<option>'+val['unidad']+'</option>');
               $('#porcentajeIVAActualiza').val(val['porcentajeIVA']);
               $('#porcentajeIEPSActualiza').val(val['porcentajeIEPS']);
               $('#porcentajeRetIVAActualiza').val(val['porcentajeRetIVA']);
@@ -109,7 +110,15 @@
         });
 
         poblarTabla();
-
+        
+        function rellenaUnidades(){
+          $.getJSON('<?php echo base_url()?>index.php/unidades/todos',function(data){
+            $.each(data,function(key,val){
+              $("#unidad").append("<option value="+val['id']+">"+val['nombre']+"</option>");
+            });
+          });
+        }
+        
         function poblarTabla(){
           $.getJSON('<?php echo base_url()?>index.php/productos/todos', function(data) {
             $('#tabla').dataTable().fnClearTable();
@@ -122,7 +131,7 @@
         function limpiaFormulario(){
           $('#idActualiza').empty();
           $('input:text').val('');
-          
+          $('#unidad').empty();
         }
     }); 
 
@@ -172,12 +181,13 @@
         <input type="text" name="nombre" id="nombre" class="text ui-widget-content ui-corner-all" />
         <label for="descripcion">Descripcion</label>
         <input type="text" name="descripcion" id="descripcion" class="text ui-widget-content ui-corner-all" />
+        <label for="unidad">Unidad</label><br>
+        <select id="unidad" name="unidad">
+        </select><br>
         <label for="precio1">Precio 1</label>
         <input type="text" name="precio1" id="precio1" class="text ui-widget-content ui-corner-all" />
         <label for="precio2">Precio 2</label>
         <input type="text" name="precio2" id="precio2" class="text ui-widget-content ui-corner-all" />
-        <label for="unidad">Unidad</label>
-        <input type="text" name="unidad" id="unidad" class="text ui-widget-content ui-corner-all" />
         <label for="porcentajeIVA">IVA</label>
         <input type="text" name="porcentajeIVA" id="porcentajeIVA" class="text ui-widget-content ui-corner-all" />
         <label for="porcentajeIEPS">IEPS</label>
@@ -201,12 +211,13 @@
         <input type="text" name="nombreActualiza" id="nombreActualiza" class="text ui-widget-content ui-corner-all" />
         <label for="descripcionActualiza">Descripcion</label>
         <input type="text" name="descripcionActualiza" id="descripcionActualiza" class="text ui-widget-content ui-corner-all" />
+        <label for="unidadActualiza">Unidad</label><br>
+        <select id="unidadActualiza">
+        </select><br>
         <label for="precio1Actualiza">Precio 1</label>
         <input type="text" name="precio1Actualiza" id="precio1Actualiza" class="text ui-widget-content ui-corner-all" />
         <label for="precio2Actualiza">Precio 2</label>
         <input type="text" name="precio2Actualiza" id="precio2Actualiza" class="text ui-widget-content ui-corner-all" />
-        <label for="unidadActualiza">Unidad</label>
-        <input type="text" name="unidadActualiza" id="unidadActualiza" class="text ui-widget-content ui-corner-all" />
         <label for="porcentajeIVAActualiza">IVA</label>
         <input type="text" name="porcentajeIVAActualiza" id="porcentajeIVAActualiza" class="text ui-widget-content ui-corner-all" />
         <label for="porcentajeIEPSActualiza">IEPS</label>
