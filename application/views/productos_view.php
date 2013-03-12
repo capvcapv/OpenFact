@@ -74,7 +74,6 @@
 
         $('#nuevo').button({icons:{primary: "ui-icon-plusthick"}}).click(function(){
           limpiaFormulario();
-          rellenaUnidades();
           $('#formulario').dialog('open');
         });
 
@@ -99,7 +98,7 @@
               $('#descripcionActualiza').val(val['descripcion']);
               $('#precio1Actualiza').val(val['precio1']);
               $('#precio2Actualiza').val(val['precio2']);
-              $('#unidadActualiza').append('<option>'+val['unidad']+'</option>');
+              $('#unidadActualiza').val(val['unidad']);
               $('#porcentajeIVAActualiza').val(val['porcentajeIVA']);
               $('#porcentajeIEPSActualiza').val(val['porcentajeIEPS']);
               $('#porcentajeRetIVAActualiza').val(val['porcentajeRetIVA']);
@@ -110,11 +109,13 @@
         });
 
         poblarTabla();
+        rellenaUnidades();
         
         function rellenaUnidades(){
           $.getJSON('<?php echo base_url()?>index.php/unidades/todos',function(data){
             $.each(data,function(key,val){
               $("#unidad").append("<option value="+val['id']+">"+val['nombre']+"</option>");
+              $("#unidadActualiza").append("<option value="+val['id']+">"+val['nombre']+"</option>");
             });
           });
         }
@@ -131,7 +132,6 @@
         function limpiaFormulario(){
           $('#idActualiza').empty();
           $('input:text').val('');
-          $('#unidad').empty();
         }
     }); 
 
