@@ -54,7 +54,6 @@
       
 
         $('#agregarMovimiento').button({icons:{primary: "ui-icon-plusthick"}, text:false}).click(function(){
-
           agregarMovimiento();
         });
 
@@ -129,6 +128,26 @@
               });
             }
         });
+
+      $('#lugarExpedicion').autocomplete({
+        source:function(request,response){
+          $.getJSON('<?=base_url()?>index.php/sucursales/todos/'+$('#lugarExpedicion').val(),function(data){
+            response($.map(data,function(item){
+              return{
+                label:item.nombre,
+                value:item.id,
+              }
+            }))
+          });
+        },
+        select:function(event,ui){
+          $.getJSON('<?=base_url()?>index.php/sucursales/sucursal/'+$('#lugarExpedicion').val(),function(data){
+            $.each(data,function(key,val){
+                $('#lugarExpedicion').val(val['domicilio']);        
+            });
+          });
+        }
+      });
 
       $('#movimientos').on('click','tr',function(event){
         

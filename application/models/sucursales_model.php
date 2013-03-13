@@ -18,7 +18,7 @@ class Sucursales_model extends CI_Model {
 
 	public function obtiene(){
 		$this->db->where('id',$this->id);
-		$this->db->get('Sucursales');
+		return $this->db->get('Sucursales');
 	}
 
 	public function guarda(){

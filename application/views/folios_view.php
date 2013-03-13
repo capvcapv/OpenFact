@@ -50,7 +50,7 @@
       var folio=new Folios();
 
       $('#ajaxload').hide();
-    	$('#btnSalir').button().click(function(){
+    	$('#btnSalir').button({icons:{primary: "ui-icon-closethick"}}).click(function(){
          location.href='http://localhost/OpenFact/'
        });
     
@@ -86,6 +86,7 @@
           qrcode.callback = resultadoCBB;      
       
       function resultadoCBB(data) {
+          $('#resultadoFolios').empty();
           $('#resultadoFolios').html(procesaDatos(data));
       }
 
