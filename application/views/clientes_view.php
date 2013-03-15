@@ -78,7 +78,7 @@
         });
 
         $('#atras').button({icons:{primary: "ui-icon-closethick"}}).click(function(){
-          location.href='http://localhost/OpenFact/index.php/openfact'
+          location.href='<?php echo base_url()?>'
         });    
 
         $('#tabla').dataTable({

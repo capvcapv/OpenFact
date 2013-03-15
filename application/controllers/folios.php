@@ -30,12 +30,12 @@ class Folios extends CI_Controller {
 			$this->Folios_model->serie=$this->input->post('serie');
 			$this->Folios_model->folio=$i;
 			$this->Folios_model->blockfolios=$id;
-			$this->Folios_model->ocupado=0;
+			$this->Folios_model->ocupado=1;
 			$this->Folios_model->guarda();
 		}
 
+		$this->load->helper('File');
 		
-
 	}
 
 	public function subirCBB(){
@@ -60,5 +60,13 @@ class Folios extends CI_Controller {
 
 			echo $data['orig_name'];
 		}
+	}
+
+	public function infoFolios(){
+
+		$this->load->model('Folios_model');
+		$res=$this->Folios_model->foliosDisponibles();
+		
+		echo $res->num_rows();
 	}
 }

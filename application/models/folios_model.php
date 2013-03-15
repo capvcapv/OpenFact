@@ -24,6 +24,11 @@ class Folios_model extends CI_Model {
 			$this->db->where('blockfolios', $pBlock);
 			return $this->db->get('Folios');	
 		}
+
+		public function foliosDisponibles(){
+			$this->db->where('ocupado',0);
+			return $this->db->get('Folios');
+		}
 						
 }
 	

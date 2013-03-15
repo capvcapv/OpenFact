@@ -36,6 +36,7 @@
         body {
             font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
         }
+        #infoFolios{ margin-right: 30px; margin-left: 30px}
         .formulario label input { display:block; }
         .formulario input.text { margin-bottom:12px; width:95%; padding: .4em; }
         .formulario{font-size: 62.5%;}
@@ -51,20 +52,20 @@
 
       $('#ajaxload').hide();
     	$('#btnSalir').button({icons:{primary: "ui-icon-closethick"}}).click(function(){
-         location.href='http://localhost/OpenFact/'
+         location.href='<?php echo base_url()?>'
        });
     
       $('#btnGuardar').hide().button().on('click',function(){
 
         $('#ajaxload').show();
-        $.post('http://localhost/OpenFact/index.php/folios/guarda',{serie:folio.serie,folioInicial:folio.folioInicial,folioFinal:folio.folioFinal,aprobacion:folio.aprobacion,inicioVigencia:folio.inicioVigencia,finVigencia:folio.finVigencia,cbb:folio.cbb},function() {
+        $.post('<?php echo base_url()?>index.php/folios/guarda',{serie:folio.serie,folioInicial:folio.folioInicial,folioFinal:folio.folioFinal,aprobacion:folio.aprobacion,inicioVigencia:folio.inicioVigencia,finVigencia:folio.finVigencia,cbb:folio.cbb},function() {
                     alert('Folios dado de alta exitosamente');
-                     location.href='http://localhost/OpenFact/'
+                     location.href='<?php echo base_url()?>'
                   });
       });
 
       new AjaxUpload('#cbb',{
-            action:'http://localhost/OpenFact/index.php/folios/subirCBB',
+            action:'<?php echo base_url()?>index.php/folios/subirCBB',
             onSubmit:function(file , ext){
                       if (! (ext && /^(jpg|png)$/.test(ext))){
                           // extensiones permitidas
@@ -76,8 +77,8 @@
                       }
                },
              onComplete: function(file, response){
-                $('#cbb').attr('src','http://localhost/OpenFact/cbb/'+response);
-                qrcode.decode('http://localhost/OpenFact/cbb/'+response);
+                $('#cbb').attr('src','<?php echo base_url()?>/cbb/'+response);
+                qrcode.decode('<?php echo base_url()?>cbb/'+response);
                 folio.cbb=response;
                 $('#btnGuardar').show();
               }  
@@ -115,7 +116,9 @@
         return cadena;
       }
 
-
+      $.get('<?php echo base_url()?>index.php/folios/infoFolios',function(data){
+        $('#infoFolios').empty().html('Usted cuenta con '+data+' folios disponibles si gusta dar de alta mas folios solo presione la imagen de abajo');
+      });
 
     });
 
@@ -151,11 +154,14 @@
 	<div id='cabezera'>
       <div id="toolbar" class="ui-widget-header ui-corner-all">
         <button id="btnSalir">Salir</button>
+
       </div>
   </div>
   <br>
+  
+  
   <center>
-    <div id="cuerpo"></div>
+    <div id="infoFolios"></div>
     <img src="<?=base_url()?>imagenes/Sube.png" id='cbb'>
     <br>
     <img src="<?=base_url()?>imagenes/ajax-loader.gif" id='ajaxload'>
