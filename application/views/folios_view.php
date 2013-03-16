@@ -60,7 +60,7 @@
         $('#ajaxload').show();
         $.post('<?php echo base_url()?>index.php/folios/guarda',{serie:folio.serie,folioInicial:folio.folioInicial,folioFinal:folio.folioFinal,aprobacion:folio.aprobacion,inicioVigencia:folio.inicioVigencia,finVigencia:folio.finVigencia,cbb:folio.cbb},function() {
                     alert('Folios dado de alta exitosamente');
-                     location.href='<?php echo base_url()?>'
+                     //location.href='<?php echo base_url()?>'
                   });
       });
 
@@ -73,7 +73,7 @@
                           // cancela upload
                           return false;
                       } else {
-                      
+                        
                       }
                },
              onComplete: function(file, response){
@@ -113,7 +113,33 @@
         cadena=cadena+'Inicio vigencia:'+folio.inicioVigencia+'<br>';
         cadena=cadena+'Fin vigencia:'+folio.finVigencia+'<br>';
 
+        validaRFC(info[1]);
+        validaNoAprobacion(info[2]);
         return cadena;
+      }
+
+      function validaRFC(pRFC){
+        $.getJSON('<?php echo base_url()?>index.php/empresas/busca',function(data){
+          if(data[0].rfc!=pRFC){
+            alert('Estos folios pertenecen al contribuyente '+pRFC);
+            recargaPagina();
+          }         
+        });
+      }
+
+      function validaNoAprobacion(pAprobacion){
+        $.getJSON('<?php echo base_url()?>index.php/folios/foliosDisponibles',function(data){
+          $.each(data,function(key,val){
+            if(val['aprobacion']==pAprobacion){
+              alert('Folios ya cargados');
+              recargaPagina();
+            }
+          });
+        });
+      }
+
+      function recargaPagina(){
+        location.href='<?php echo base_url()?>index.php/folios';
       }
 
       $.get('<?php echo base_url()?>index.php/folios/infoFolios',function(data){
@@ -121,6 +147,31 @@
       });
 
     });
+      
+      function inspeccionar(obj)
+        {
+          var msg = '';
+
+          for (var property in obj)
+          {
+            if (typeof obj[property] == 'function')
+            {
+              var inicio = obj[property].toString().indexOf('function');
+              var fin = obj[property].toString().indexOf(')')+1;
+              var propertyValue=obj[property].toString().substring(inicio,fin);
+              msg +=(typeof obj[property])+' '+property+' : '+propertyValue+' ;\n';
+            }
+            else if (typeof obj[property] == 'unknown')
+            {
+              msg += 'unknown '+property+' : unknown ;\n';
+            }
+            else
+            {
+              msg +=(typeof obj[property])+' '+property+' : '+obj[property]+' ;\n';
+            }
+          }
+          return msg;
+        }
 
       var Folios=function(){
 

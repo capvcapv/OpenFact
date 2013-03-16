@@ -36,11 +36,11 @@
         $(document).ready(function($) {
                 
             $('#nuevo').button({icons:{primary: "ui-icon-plusthick"}}).click(function(){
-              location.href='http://localhost/OpenFact/index.php/facturas/nuevaFactura';
+              location.href='<?php echo base_url()?>index.php/facturas/nuevaFactura';
             });    
           
             $('#atras').button({icons:{primary: "ui-icon-closethick"}}).click(function(){
-                location.href='http://localhost/OpenFact/index.php/openfact'
+                location.href='<?php echo base_url()?>index.php/openfact'
             });    
 
             $('#tabla').dataTable({

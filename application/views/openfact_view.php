@@ -37,7 +37,7 @@
               buttons:{
                 "Guardar":function(){
                     $.post('http://localhost/OpenFact/index.php/empresas/actualiza',{nombre:$('#nombre').val(),rfc:$('#rfc').val(),calle:$('#calle').val(),numInt:$('#numInt').val(),numExt:$('#numExt').val(),colonia:$('#colonia').val(),cp:$('#cp').val(),municipio:$('#municipio').val(),estado:$('#estado').val(),pais:$('#pais').val(),regimenFiscal:$('#regimenFiscal').val(),porcentajeIVA:$('#porcentajeIVA').val(),porcentajeIEPS:$('#porcentajeIEPS').val(),porcentajeRetISR:$('#porcentajeRetISR').val(),porcentajeRetIVA:$('#porcentajeRetIVA').val()},function() {
-                      aler('Datos actualizados');
+                      alert('Datos actualizados');
                     });
                 },
                 "Cancelar":function(){

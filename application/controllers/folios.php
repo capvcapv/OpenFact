@@ -30,12 +30,16 @@ class Folios extends CI_Controller {
 			$this->Folios_model->serie=$this->input->post('serie');
 			$this->Folios_model->folio=$i;
 			$this->Folios_model->blockfolios=$id;
-			$this->Folios_model->ocupado=1;
+			$this->Folios_model->ocupado=0;
 			$this->Folios_model->guarda();
 		}
 
-		$this->load->helper('File');
-		
+		if(!file_exists('/home/carlos/cbb/')){
+			mkdir('/home/carlos/cbb/');
+		}
+
+		rename('/var/www/OpenFact/cbb/'.$this->input->post('cbb'),'carpeta temporal'.$this->input->post('cbb'));
+						
 	}
 
 	public function subirCBB(){
@@ -68,5 +72,11 @@ class Folios extends CI_Controller {
 		$res=$this->Folios_model->foliosDisponibles();
 		
 		echo $res->num_rows();
+	}
+
+	public function foliosDisponibles(){
+		$this->load->model('Blockfolio_model');
+		$res=$this->Blockfolio_model->obtenerTodos();
+		echo json_encode($res->result());
 	}
 }

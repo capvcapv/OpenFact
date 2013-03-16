@@ -21,6 +21,7 @@ class Empresa_model extends CI_Model {
 			parent::__construct();
 		}
 		
+		//Decapred
 		public function todos(){
 			$consulta = $this->db->get('Empresa'); 
 			return $consulta;
@@ -33,6 +34,11 @@ class Empresa_model extends CI_Model {
 		public function actualiza($pId){
 			$this->db->where('id',$pId);
 			$this->db->update('Empresa', $this); 
+		}
+
+		public function obtiene(){
+			$this->db->where('id',$this->id);
+			return $this->db->get('Empresa');
 		}				
 }
 	

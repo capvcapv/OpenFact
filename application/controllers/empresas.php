@@ -30,7 +30,8 @@ class Empresas extends CI_Controller {
 
 	public function busca(){
 		$this->load->model('Empresa_model');
-		$res=$this->Empresa_model->todos();
+		$this->Empresa_model->id=1;
+		$res=$this->Empresa_model->obtiene();
 		echo json_encode($res->result());
 	}
 
