@@ -46,6 +46,8 @@
         
         var idCliente='';
 
+        agregarMovimiento();
+
         $('#atras').button({icons:{primary: "ui-icon-closethick"}}).click(function(){
                 location.href='http://localhost/OpenFact/index.php/openfact'
             });
@@ -158,13 +160,19 @@
       });
 
       function agregarMovimiento(){
-        $('#movimientos').append("<tr><th width='10%'><input class='cantidad' type='number'/></th><th width='30%'><input class='movimiento' STYLE='WIDTH:100%' type='text'/></th><th class='unitario' width='10%'></th><th class='total' width='10%'></th><th class='eliminar' width='10%'>Eliminar</th> </tr>");
+        $('#movimientos').append("<tr><th width='10%'><input disabled='disabled' class='codigo' type='text'/></th><th width='50%'><input class='movimiento' style='width:100%' type='text'/></th><th width='10%'><input class='cantidad' type='number' value='1'/></th><th class='unitario' width='10%'></th><th class='total' width='10%'></th><th class='eliminar' width='10%'>Eliminar</th> </tr>");
         var tProducto=$('#movimientos').find('tr:last .movimiento');
         var tCantidad=$('#movimientos').find('tr:last .cantidad');
         var tTotal=$('#movimientos').find('tr:last .total');
         var tUnitario=$('#movimientos').find('tr:last .unitario');
+        var tCodigo=$('#movimientos').find('tr:last .codigo');
+        
+        tCantidad.on('change',function(){
+
+          tTotal.html(tCantidad.val()*tUnitario.html());
+        });
+
         tProducto.autocomplete({
- 
             source:function(request,response){
               $.getJSON('<?=base_url()?>index.php/productos/todos/'+$(tProducto).val(),function(data){
 
@@ -178,15 +186,18 @@
               });
             },
             minLength:2,
-            close:function(event,ui){
-              $.getJSON('<?=base_url()?>index.php/productos/producto/'+$(tProducto).val(),function(data){
-                  $.each(data,function(key,val){
-                    
-                    tUnitario.append(val['precio1']);
-                  });
+            select: function( event, ui ) {
+
+              $.getJSON('<?=base_url()?>index.php/productos/producto/'+ui.item.value,function(data){
+                  
+                    tCodigo.val(ui.item.value);
+                    tProducto.val(ui.item.label);
+                    tUnitario.html(data[0].precio1);
+                    tTotal.html(data[0].precio1);
+                  
               })
             }
-        });
+        });        
       }
 
       function limpiaFormulario(){
@@ -234,8 +245,9 @@
       <table id="users" class="ui-widget ui-widget-content">
         <thead>
           <tr class="ui-widget-header ">
+            <th width='10'>Codigo</th>
+            <th width='50%'>Producto</th>
             <th width='10%'>Cantidad</th>
-            <th width='60%'>Producto</th>
             <th width='10%'>Precio Unitario</th>
             <th width='10%'>Total</th>
             <th width='10%'></th>

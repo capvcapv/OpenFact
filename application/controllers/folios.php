@@ -38,7 +38,7 @@ class Folios extends CI_Controller {
 			mkdir('/home/carlos/cbb/');
 		}
 
-		rename('/var/www/OpenFact/cbb/'.$this->input->post('cbb'),'carpeta temporal'.$this->input->post('cbb'));
+		rename('/var/www/OpenFact/cbb/'.$this->input->post('cbb'),'/home/carlos/cbb/'.$this->input->post('cbb'));
 						
 	}
 

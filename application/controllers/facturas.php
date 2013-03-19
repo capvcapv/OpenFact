@@ -17,6 +17,7 @@ class Facturas extends CI_Controller {
 		$this->load->view('nuevaFactura_view.php');
 	}
 
+
 	public function creaFactura(){
 
 		$this->load->model('Facturas_model');
@@ -85,6 +86,3 @@ class Facturas extends CI_Controller {
 			}	
 	}
 }
-
-/* End of file facturas.php */
-/* Location: ./application/controllers/facturas.php */
