@@ -43,9 +43,12 @@
           modal: true,
           buttons:{
             "Crear":function(){
-              $.post('<?php echo base_url()?>index.php/clientes/guarda',{razonSocial:$('#razonSocial').val(),rfc:$('#rfc').val(),calle:$('#calle').val(),numInt:$('#numInt').val(),numExt:$('#numExt').val(),colonia:$('#colonia').val(),cp:$('#cp').val(),municipio:$('#municipio').val(),estado:$('#estado').val(),pais:$('#pais').val(),correoElectronico:$('#correoElectronico').val(),telefono:$('#telefono').val(),porcentajeIVA:$('#porcentajeIVA').val(),porcentajeIEPS:$('#porcentajeIEPS').val(),porcentajeRetISR:$('#porcentajeRetISR').val(),porcentajeRetIVA:$('#porcentajeRetIVA').val()},function() {
+              $.post('<?php echo base_url()?>index.php/clientes/guarda',{razonSocial:$('#razonSocial').val(),rfc:$('#rfc').val(),calle:$('#calle').val(),numInt:$('#numInt').val(),numExt:$('#numExt').val(),colonia:$('#colonia').val(),cp:$('#cp').val(),municipio:$('#municipio').val(),estado:$('#estado').val(),pais:$('#pais').val(),correoElectronico:$('#correoElectronico').val(),telefono:$('#telefono').val(),porcentajeIVA:$('#porcentajeIVA').val(),porcentajeIEPS:$('#porcentajeIEPS').val(),porcentajeRetISR:$('#porcentajeRetISR').val(),porcentajeRetIVA:$('#porcentajeRetIVA').val()},function(data) {
+                  if(data.mensaje!=''){
+                    alert(data.mensaje);
+                  }
                   poblarTabla();
-                });
+                },'json');
               $(this).dialog('close');
             },
             "Cancelar":function(){
@@ -120,7 +123,7 @@
         function poblarTabla(){
           $.getJSON('<?php echo base_url()?>index.php/clientes/todos', function(data) {
             $('#tabla').dataTable().fnClearTable();
-            $.each(data, function(key, val) {
+            $.each(data.datos, function(key, val) {
               $('#tabla').dataTable().fnAddData([val['id'],val['razonSocial'],val['rfc']]);
              }); 
           });

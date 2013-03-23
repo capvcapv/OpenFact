@@ -49,7 +49,7 @@
         agregarMovimiento();
 
         $('#atras').button({icons:{primary: "ui-icon-closethick"}}).click(function(){
-                location.href='http://localhost/OpenFact/index.php/openfact'
+                location.href='<?php echo base_url()?>index.php/openfact'
             });
       
         $('#facturar').button({icons:{primary: "ui-icon-check"}});
@@ -240,9 +240,7 @@
    </div>
 
     <div id='movimientos_fact' class='ui-widget'>
-      <button id="agregarMovimiento">Agregar</button>
-      <br>
-      <table id="users" class="ui-widget ui-widget-content">
+        <table id="users" class="ui-widget ui-widget-content">
         <thead>
           <tr class="ui-widget-header ">
             <th width='10'>Codigo</th>
@@ -267,6 +265,7 @@
           </tr>-->
         </tbody>
       </table>
+      <button id="agregarMovimiento">Agregar</button>
     </div>
 
 
