@@ -34,11 +34,11 @@ class Folios extends CI_Controller {
 			$this->Folios_model->guarda();
 		}
 
-		if(!file_exists('/home/carlos/cbb/')){
-			mkdir('/home/carlos/cbb/');
+		if(!file_exists($this->config->item('CBB'))){
+			mkdir($this->config->item('CBB'));
 		}
 
-		rename('/var/www/OpenFact/cbb/'.$this->input->post('cbb'),'/home/carlos/cbb/'.$this->input->post('cbb'));
+		rename('/var/www/OpenFact/cbb/'.$this->input->post('cbb'),$this->config->item('CBB').$this->input->post('cbb'));
 						
 	}
 

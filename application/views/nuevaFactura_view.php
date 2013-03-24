@@ -32,6 +32,7 @@
     div#movimientos_fact table { margin: 1em 0; border-collapse: collapse; width: 100%; }
     div#movimientos_fact table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
 
+    #agregarMovimiento{ float: right}
 
       .formulario label input { display:block; }
       .formulario input.text { margin-bottom:12px; width:95%; padding: .4em; }
@@ -55,7 +56,7 @@
         $('#facturar').button({icons:{primary: "ui-icon-check"}});
       
 
-        $('#agregarMovimiento').button({icons:{primary: "ui-icon-plusthick"}, text:false}).click(function(){
+        $('#agregarMovimiento').button({icons:{primary: "ui-icon-plusthick"}}).click(function(){
           agregarMovimiento();
         });
 
@@ -223,14 +224,14 @@
     
     <div class="ui-widget" id='cliente'>
       <label>Cliente:</label><br>
-      <input id='buscaCliente'/><button id='nuevoCliente'>Nuevo</button>
+      <input id='buscaCliente'/><button id='nuevoCliente'>Nuevo Cliente</button>
       <br><br>
       <div id='domicilio'>
         Datos de la empresa:
       </div>
       <br>
       <label>Lugar de expedición:</label><br>
-      <input id='lugarExpedicion'/><button id='nuevoSucursal'>Nuevo</button> <br>
+      <input id='lugarExpedicion'/><button id='nuevoSucursal'>Nueva Sucursal</button> <br>
       <label>Método de pago:</label><br>
       <input id='metodoPago'/><br>
       <label>Condiciones de pago:</label><br>
@@ -265,7 +266,7 @@
           </tr>-->
         </tbody>
       </table>
-      <button id="agregarMovimiento">Agregar</button>
+      <button id="agregarMovimiento">Agregar Movimiento</button>
     </div>
 
 

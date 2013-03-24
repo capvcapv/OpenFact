@@ -38,7 +38,6 @@ class Clientes_model extends CI_Model {
 
 		public function guarda(){
 			$this->db->insert('Clientes',$this);
-			return $this->db->_error_message();
 		}
 
 		public function actualiza($pId){

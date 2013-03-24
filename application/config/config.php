@@ -15,7 +15,14 @@
 |
 */
 $config['base_url']	= 'http://localhost/OpenFact/';
-
+/*
+|--------------------------------------------------------------------------
+| OPENFACT
+|--------------------------------------------------------------------------
+|	CBB - Carpeta donde guardará los codigos de barra bidimensionales	
+|		  Recuerde dar permisos de escritura a dicha carpeta
+*/
+$config['CBB']='/home/carlos/cbb/';
 /*
 |--------------------------------------------------------------------------
 | Index File

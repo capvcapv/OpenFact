@@ -85,4 +85,16 @@ class Facturas extends CI_Controller {
 
 			}	
 	}
+
+	public function condiciones(){
+		$this->load->model('Condicionespago_model');
+		$res=$this->Condicionespago_model->todos();
+		echo json_encode($res->result());
+	}
+
+	public function metodos(){
+		$this->load->model('MetodosPago_model');
+		$res=$this->MetodosPago_model->todos();
+		echo json_encode($res->result());
+	}
 }
