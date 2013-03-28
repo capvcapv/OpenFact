@@ -31,11 +31,8 @@ class Clientes extends CI_Controller {
 
 	public function todos($razon=''){
 		$this->load->model('Clientes_model');
-		$this->load->model('Mensaje_model');
 		$res=$this->Clientes_model->todos($razon);
-		$this->Mensaje_model->mensaje='Ok';
-		$this->Mensaje_model->datos=$res->result();
-		echo json_encode($this->Mensaje_model);
+		echo json_encode($res->result());
 	}
 
 	public function cliente($pId){

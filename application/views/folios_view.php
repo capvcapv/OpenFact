@@ -122,7 +122,9 @@
         $.getJSON('<?php echo base_url()?>index.php/empresas/busca',function(data){
           if(data[0].rfc!=pRFC){
             alert('Estos folios pertenecen al contribuyente '+pRFC);
-            recargaPagina();
+            $.post('<?php echo base_url()?>index.php/folios/borraCache',{cbb:folio.cbb},function(){
+               recargaPagina(); 
+            });           
           }         
         });
       }

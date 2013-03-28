@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+  <!DOCTYPE HTML>
 <html lang='es'>
   <head>
     <meta charset="utf-8">
@@ -48,6 +48,18 @@
         var idCliente='';
 
         agregarMovimiento();
+
+        $.getJSON('<?=base_url()?>index.php/facturas/condiciones/',function(data){
+          $.map(data,function(item){
+            $('#condicionesPago').append('<option value="'+item.id+'">'+item.nombre+'</option>');        
+          });
+        });
+
+        $.getJSON('<?=base_url()?>index.php/facturas/metodos/',function(data){
+          $.map(data,function(item){
+            $('#metodoPago').append('<option value="'+item.id+'">'+item.nombre+'</option>');        
+          });
+        });
 
         $('#atras').button({icons:{primary: "ui-icon-closethick"}}).click(function(){
                 location.href='<?php echo base_url()?>index.php/openfact'
@@ -233,9 +245,9 @@
       <label>Lugar de expedición:</label><br>
       <input id='lugarExpedicion'/><button id='nuevoSucursal'>Nueva Sucursal</button> <br>
       <label>Método de pago:</label><br>
-      <input id='metodoPago'/><br>
+      <select id='metodoPago'></select><br>
       <label>Condiciones de pago:</label><br>
-      <input id='condicionesPago' /> 
+      <select id='condicionesPago'></select> 
       <label>Num. de cuenta:</label>
       <input id='numCuenta'/><br><br>
    </div>

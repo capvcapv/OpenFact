@@ -42,6 +42,10 @@ class Folios extends CI_Controller {
 						
 	}
 
+	public function borraCache(){
+		unlink('/var/www/OpenFact/cbb/'.$this->input->post('cbb'));
+	}
+
 	public function subirCBB(){
 		
 		$config['upload_path'] = './cbb/';

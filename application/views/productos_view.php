@@ -183,7 +183,7 @@
         <input type="text" name="descripcion" id="descripcion" class="text ui-widget-content ui-corner-all" />
         <label for="unidad">Unidad</label><br>
         <select id="unidad" name="unidad">
-        </select><br>
+        </select><br><br>
         <label for="precio1">Precio 1</label>
         <input type="text" name="precio1" id="precio1" class="text ui-widget-content ui-corner-all" />
         <label for="precio2">Precio 2</label>

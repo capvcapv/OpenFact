@@ -120,7 +120,7 @@
         function poblarTabla(){
           $.getJSON('<?php echo base_url()?>index.php/clientes/todos', function(data) {
             $('#tabla').dataTable().fnClearTable();
-            $.each(data.datos, function(key, val) {
+            $.each(data, function(key, val) {
               $('#tabla').dataTable().fnAddData([val['id'],val['razonSocial'],val['rfc']]);
              }); 
           });

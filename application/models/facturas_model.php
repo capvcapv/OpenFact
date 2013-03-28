@@ -10,6 +10,7 @@ class Facturas_model extends CI_Model {
 	var $condicionesPago;
 	var $cuentaPago;
 	var $lugarExpedicion;
+	var $estatus;
 
 	public function __construct() {
 		parent::__construct();
@@ -45,6 +46,7 @@ class Facturas_model extends CI_Model {
 		$this->db->set('condicionesPago',$this->condicionesPago);
 		$this->db->set('cuentaPago',$this->cuentaPago);
 		$this->db->set('lugarExpedicion',$this->lugarExpedicion);
+		$this->db->set('estatus',0);
 	
 		$this->db->insert('Facturas');
 
