@@ -17,6 +17,13 @@ class Facturas extends CI_Controller {
 		$this->load->view('nuevaFactura_view.php');
 	}
 
+	public function muestraFacturas(){
+
+		$this->load->model('Facturas_model');
+		$res=$this->Facturas_model->todos();
+
+		echo json_encode($res->result());
+	}
 
 	public function creaFactura(){
 
@@ -96,5 +103,27 @@ class Facturas extends CI_Controller {
 		$this->load->model('MetodosPago_model');
 		$res=$this->MetodosPago_model->todos();
 		echo json_encode($res->result());
+	}
+
+	public function inicializaFactura(){
+
+		$this->load->model('Folios_model');
+		$folios=$this->Folios_model->foliosDisponibles();
+		$a=$folios->result();
+		
+		echo json_encode($a[0]);
+
+		$this->Folios_model->id=$a[0]->id;
+		$this->Folios_model->serie=$a[0]->serie;
+		$this->Folios_model->folio=$a[0]->folio;
+		$this->Folios_model->blockfolios=$a[0]->blockfolios;
+		$this->Folios_model->ocupado=1;	
+
+		$this->Folios_model->actualiza();	
+
+		$this->load->model('Facturas_model');
+		$this->Facturas_model->folio=$a[0]->id;
+		$this->Facturas_model->estatus=0;	
+		$this->Facturas_model->guarda();	
 	}
 }

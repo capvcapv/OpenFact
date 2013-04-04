@@ -24,26 +24,8 @@
     <script src="<?php echo base_url()?>js/findpat.js"></script>
     <script src="<?php echo base_url()?>js/alignpat.js"></script>
     <script src="<?php echo base_url()?>js/databr.js"></script>
-    <style type="text/css">
-
-        #toolbar {
-            padding: 2px 2px;
-            font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
-            font-size: 62.5%;
-            margin-left:30px;
-            margin-right:30px;
-          }
-        body {
-            font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
-        }
-        #infoFolios{ margin-right: 30px; margin-left: 30px}
-        .formulario label input { display:block; }
-        .formulario input.text { margin-bottom:12px; width:95%; padding: .4em; }
-        .formulario{font-size: 62.5%;}
-        fieldset { padding:0; border:0; margin-top:0px; }
-        .validateTips { border: 1px solid transparent; padding: 0.3em; }
-        .ui-dialog .ui-state-error { padding: .3em; }
-    </style>
+    <link href="<?php echo base_url()?>media/css/demo_table_jui.css" rel="stylesheet">
+    <link href="<?php echo base_url()?>css/estilos.css" rel="stylesheet">
     <script type="text/javascript">
 
    $(document).ready(function(){
@@ -60,7 +42,7 @@
         $('#ajaxload').show();
         $.post('<?php echo base_url()?>index.php/folios/guarda',{serie:folio.serie,folioInicial:folio.folioInicial,folioFinal:folio.folioFinal,aprobacion:folio.aprobacion,inicioVigencia:folio.inicioVigencia,finVigencia:folio.finVigencia,cbb:folio.cbb},function() {
                     alert('Folios dado de alta exitosamente');
-                     //location.href='<?php echo base_url()?>'
+                    location.href='<?php echo base_url()?>'
                   });
       });
 

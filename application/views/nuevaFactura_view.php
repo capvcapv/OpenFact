@@ -1,49 +1,14 @@
-  <!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html lang='es'>
   <head>
     <meta charset="utf-8">
     <link href="<?php echo base_url()?>css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
     <script src="<?php echo base_url()?>js/jquery-1.8.3.js"></script>
     <script src="<?php echo base_url()?>js/jquery-ui-1.9.2.custom.js"></script>
-    <style type="text/css" title="currentStyle">
-    
-    body { font-size: 62.5%; }
-    
-    #toolbar {
-      padding: 2px 2px;
-      font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
-      margin-left:30px;
-      margin-right:30px;
-    }
-
-    #domicilio{
-      margin-left: 30px;
-      margin-right: 30px;
-      border: 1px;
-    }
-
-    #cliente { padding:0; border:0; margin-top:25px; margin-left: 30px; }
-    .validateTips { border: 1px solid transparent; padding: 0.3em; }
-    .ui-dialog .ui-state-error { padding: .3em; }
-
-    #buscaCliente{width: 30%}
-    #lugarExpedicion{width: 70%}
-     div#movimientos_fact { margin-left: 30px; margin-right: 30px;}
-    div#movimientos_fact table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-    div#movimientos_fact table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-
-    #agregarMovimiento{ float: right}
-
-      .formulario label input { display:block; }
-      .formulario input.text { margin-bottom:12px; width:95%; padding: .4em; }
-      fieldset { padding:0; border:0; margin-top:25px; }
-      .validateTips { border: 1px solid transparent; padding: 0.3em; }
-      .ui-dialog .ui-state-error { padding: .3em; }
-
-    </style>
+    <link href="<?php echo base_url()?>css/estilos.css" rel="stylesheet">
     <script type="text/javascript">
 
-      $(document).ready(function($) {
+      $(document).ready(function() {
         
         var idCliente='';
 
@@ -184,7 +149,6 @@
 
           tTotal.html(tCantidad.val()*tUnitario.html());
         });
-
         tProducto.autocomplete({
             source:function(request,response){
               $.getJSON('<?=base_url()?>index.php/productos/todos/'+$(tProducto).val(),function(data){
@@ -207,7 +171,7 @@
                     tProducto.val(ui.item.label);
                     tUnitario.html(data[0].precio1);
                     tTotal.html(data[0].precio1);
-                  
+                                      
               })
             }
         });        
@@ -217,7 +181,7 @@
           
           $('#formulario input:text').val('');
           $('#formularioSucursal input:text').val('');
-        }
+      }
 
       });
 
@@ -253,7 +217,7 @@
    </div>
 
     <div id='movimientos_fact' class='ui-widget'>
-        <table id="users" class="ui-widget ui-widget-content">
+        <table id="movimientos" class="ui-widget ui-widget-content">
         <thead>
           <tr class="ui-widget-header ">
             <th width='10'>Codigo</th>

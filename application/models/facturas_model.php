@@ -52,7 +52,10 @@ class Facturas_model extends CI_Model {
 
 	}
 
-}
+	public function actualiza(){
 
-/* End of file facturas_model.php */
-/* Location: ./application/models/facturas_model.php */
+		$this->db->where('id', $this->id);
+		$this->db->update('Facturas', $this);
+	}
+
+}
