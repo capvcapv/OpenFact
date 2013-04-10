@@ -119,11 +119,11 @@ class Facturas extends CI_Controller {
 		$this->Folios_model->blockfolios=$a[0]->blockfolios;
 		$this->Folios_model->ocupado=1;	
 
-		$this->Folios_model->actualiza();	
+		//$this->Folios_model->actualiza();	
 
 		$this->load->model('Facturas_model');
 		$this->Facturas_model->folio=$a[0]->id;
 		$this->Facturas_model->estatus=0;	
-		$this->Facturas_model->guarda();	
+		//$this->Facturas_model->guarda();	
 	}
 }
