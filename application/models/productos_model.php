@@ -7,6 +7,7 @@ class Productos_model extends CI_Model {
 		var $precio1;
 		var $precio2;
 		var $unidad;
+		var $exento;
 		var $porcentajeIVA;
 		var $porcentajeIEPS;
 		var $porcentajeRetIVA;

@@ -1,14 +1,24 @@
 
-var folio;
+var codigoCliente='';
+var codigoProducto='';
+var precioUni=0;
+var iva=0;
+var subtotal=0;
+var total=0;
 
 function inicializaFactura(url){
 
-  $.getJSON(url+'index.php/facturas/inicializaFactura',function(data){
-    
-    $('#serie').html(data.serie);
-    $('#folio').html(data.folio);
-    folio=data.id;
-  });
+   $.getJSON(url+'index.php/facturas/inicializaFactura',function(data){
+     
+     $('#serie').html(data.serie);
+     $('#folio').html(data.folio);
+     
+   });
+
+}
+function abreFactura(url){
+
+
 }
 
 function inicializaEventos(url){
@@ -17,8 +27,9 @@ function inicializaEventos(url){
     location.href=url+'index.php/openfact'
   });
       
-  $('#facturar').button({icons:{primary: "ui-icon-check"}});
+  $('#terminar').button({icons:{primary: "ui-icon-check"}});
       
+  $('#guardar').button({icons:{primary: "ui-icon-check"}});
 
   $('#agregarMovimiento').button({icons:{primary: "ui-icon-plusthick"}}).click(function(){
     agregarMovimiento(url);
@@ -40,6 +51,45 @@ function inicializaEventos(url){
           $(this).remove(); 
          }
 
+  });
+
+
+  $('#nombreProducto').autocomplete({
+    source:function(request,response){
+      $.getJSON(url+'index.php/productos/todos/'+$('#nombreProducto').val(),function(data){
+        response($.map(data,function(item){
+          return{
+            label:item.nombre,
+            value:item.codigo,
+         }
+        }))
+      });
+    },
+    minLength:2,
+   select: function( event, ui ) {
+      $.getJSON(url+'index.php/productos/producto/'+ui.item.value,function(data){
+          
+           $('#nombreProducto').val(ui.item.label);
+    
+           codigoProducto=ui.item.value;
+           precioUni=data[0].precio1;
+           subtotal=precioUni*parseFloat($('#cantidadProducto').val());
+
+           var data=$.ajax({
+            type:'get',
+            url:url+'index.php/facturas/iva/'+codigoProducto+'/'+codigoCliente,
+            dataType:'html',
+            global:false,
+            async:false,
+            success:function(data){
+              return data;
+            }
+           }).responseText;
+           iva=subtotal*(parseFloat(data)/100);
+           
+           $('#detalleMov').html('Precio Unitario: '+precioUni+' Subtotal: '+subtotal+' IVA: '+iva+' Total:'+parseFloat(subtotal+iva));
+      })
+    }
   });
 
 }
@@ -86,18 +136,19 @@ function inicializaFormularios(url){
 
 function cargaDatos(url){
 
-  $.getJSON(url+'index.php/facturas/condiciones/',function(data){
-    $.map(data,function(item){
+  $.getJSON(url+'index.php/facturas/datosGenerales/',function(data){
+    
+    $.map(data[0],function(item){
       $('#condicionesPago').append('<option value="'+item.id+'">'+item.nombre+'</option>');        
     });
-  });
 
-  $.getJSON(url+'index.php/facturas/metodos/',function(data){
-    $.map(data,function(item){
+    $.map(data[1],function(item){
       $('#metodoPago').append('<option value="'+item.id+'">'+item.nombre+'</option>');        
     });
-  });  
 
+  });
+
+  
   $('#buscaCliente').autocomplete({
  
       source:function(request,response){
@@ -119,6 +170,7 @@ function cargaDatos(url){
               idCliente=$('#buscaCliente').val();
               $('#buscaCliente').val(val['razonSocial']);
               $('#domicilio').empty().append('Datos del cliente:<br>'+val['razonSocial']+'<br>'+val['rfc']+'<br>'+val['calle']+' N° '+val['numExt']+' '+val['numInt']+'<br>'+val['colonia']+' '+val['municipio']+' '+val['estado']);
+              codigoCliente=val['id'];
             });
         });
       }
@@ -160,32 +212,10 @@ function agregarMovimiento(url){
     tTotal.html(tCantidad.val()*tUnitario.html());
     sumaMovimiento();
   });
-  tProducto.autocomplete({
-      source:function(request,response){
-        $.getJSON(url+'index.php/productos/todos/'+$(tProducto).val(),function(data){
-          response($.map(data,function(item){
-            return{
-              label:item.nombre,
-              value:item.codigo,
-           }
-          }))
-        });
-      },
-      minLength:2,
-     select: function( event, ui ) {
-        $.getJSON(url+'index.php/productos/producto/'+ui.item.value,function(data){
-            
-             tCodigo.val(ui.item.value);
-              tProducto.val(ui.item.label);
-              tUnitario.html(data[0].precio1);
-              tTotal.html(data[0].precio1);
-              sumaMovimiento();                   
-        })
-      }
-  });        
+        
 }
 
-function sumaMovimiento(){
+function sumaMovimiento(iva,neto){
 
   var a=$('.total');
   var b=0;
@@ -195,6 +225,7 @@ function sumaMovimiento(){
   }
 
   $('#subtotal').empty().html(b);
+
 }
 
 function limpiaFormulario(){
@@ -203,7 +234,3 @@ function limpiaFormulario(){
     $('#formularioSucursal input:text').val('');
 }
 
-function guardaDocumento(){
-
-  
-}

@@ -14,10 +14,11 @@
         var url="<?php echo base_url()?>";
         
         inicializaFormularios(url);
-        agregarMovimiento(url);
+        //agregarMovimiento(url);
         cargaDatos(url);
         inicializaEventos(url);   
-        inicializaFactura(url);     
+        inicializaFactura(url);
+           
 
       });
 
@@ -29,12 +30,14 @@
 
     <div id='cabezera'>
       <div id="toolbar" class="ui-widget-header ui-corner-all">
-        <button id="facturar">Facturar</button>
+        <button id="terminar">Terminar</button>
+        <button id="guardar">Guardar</button>
         <button id="atras">Salir</button>
       </div>
     </div>    
     
     <div class="ui-widget" id='encabezadoFactura'>
+      <h3>Datos Generales</h3>
       <label>Cliente:</label><br>
       <input id='buscaCliente'/><button id='nuevoCliente'>Nuevo Cliente</button>
       <br><br>
@@ -61,6 +64,17 @@
    </div>
 
     <div id='movimientos_fact' class='ui-widget'>
+
+        <div id="capturaMov">
+          <h3>Movimientos</h3>
+          <label>Nombre:</label>
+          <input type='text' id='nombreProducto'/>
+          <label>Cantidad:</label>
+          <input type="number" id="cantidadProducto" value='1'> <br>
+          <label id='detalleMov'> </label>   <br>
+          <button id="agregarMovimiento">Agregar Movimiento</button> <br>      
+        </div>
+
         <table id="movimientos" class="ui-widget ui-widget-content">
         <thead>
           <tr class="ui-widget-header ">
@@ -89,7 +103,6 @@
     </div>
     
     <div class='detalleFactura'>
-      <button id="agregarMovimiento">Agregar Movimiento</button> <br><br>
       <table id='impuestos'>
         <tr><th>Subtotal</th><th id='subtotal'>0.00</th></tr>
         <tr><th>IVA</th><th id='iva'>0.00</th></tr>

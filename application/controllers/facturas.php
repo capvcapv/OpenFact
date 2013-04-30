@@ -9,20 +9,134 @@ class Facturas extends CI_Controller {
 
 	public function index()
 	{
-		 $this->load->view('facturas_view');
+		
+		$this->load->view('facturas_view');
 	}
 
-	public function nuevaFactura(){
-
-		$this->load->view('nuevaFactura_view.php');
-	}
-
-	public function muestraFacturas(){
+	public function todos(){
 
 		$this->load->model('Facturas_model');
 		$res=$this->Facturas_model->todos();
 
 		echo json_encode($res->result());
+	}
+
+	public function nuevaFactura(){
+		$this->load->view('nuevaFactura_view');
+	}
+
+	/**
+	* Funcion que inicializa la factura en base a los parametros 
+	* si no se le dan los parametros este inicializa una nueva factura 
+	* el argumento debe ser la serie y folio del documento en caso de 
+	* retomar algun documento. 
+	**/
+
+	public function inicializaFactura($serie='',$folio=0){
+
+		$this->load->model('Folios_model');
+		$this->load->model('Facturas_model');
+
+		if($serie=='' && $folio==0){
+
+			$folios=$this->Folios_model->foliosDisponibles();
+			$a=$folios->result();
+			
+			echo json_encode($a[0]);
+
+			$this->Folios_model->id=$a[0]->id;
+			$this->Folios_model->serie=$a[0]->serie;
+			$this->Folios_model->folio=$a[0]->folio;
+			$this->Folios_model->blockfolios=$a[0]->blockfolios;
+			$this->Folios_model->ocupado=1;	
+
+			//$this->Folios_model->actualiza();	
+
+			$this->Facturas_model->folio=$a[0]->id;
+			$this->Facturas_model->estatus=0;	
+			//$this->Facturas_model->guarda();
+		
+		}else{
+
+			$folios=$this->Folios_model->obtener($serie,$folio);
+			$a=$folios->result();
+
+			$arreglo=array();
+			$arreglo[0]=$a;
+
+			$factura=$this->Facturas_model->obtiene($a[0]->id);
+			$b=$factura->result();
+
+			$arreglo[1]=$b;
+
+			echo json_encode($arreglo);
+
+		}
+
+			
+	}
+
+	public function guardaFactura(){
+
+
+	}
+
+	public function terminaFactura(){
+
+
+	}
+
+	public function entregaFactura(){
+
+
+	}
+
+	public function datosGenerales(){
+
+		$this->load->model('Condicionespago_model');
+		$this->load->model('MetodosPago_model');
+
+		$res=$this->Condicionespago_model->todos();
+		$res1=$this->MetodosPago_model->todos();
+
+		$array=[$res->result(),$res1->result()];
+
+		echo json_encode($array);
+	
+	}
+
+	public function iva($idProducto,$idCliente){
+
+		$this->load->model('Productos_model');
+		$this->load->model('Clientes_model');
+		$this->load->model('Empresa_model');
+
+		$res=$this->Productos_model->busca($idProducto);
+		$producto=$res->result();
+
+		if($producto[0]->exento==1){
+			echo "0";
+		}else{
+
+			if($producto[0]->porcentajeIVA>1){
+				echo $producto[0]->porcentajeIVA;
+			}else{
+				$res=$this->Clientes_model->busca($idCliente);
+				$cliente=$res->result();
+
+				if($cliente[0]->porcentajeIVA>1){
+					echo $cliente[0]->porcentajeIVA;
+				}else{
+					$this->Empresa_model->id=1;
+					$res=$this->Empresa_model->obtiene();
+					$empresa=$res->result();
+
+					echo $empresa[0]->porcentajeIVA;
+				}
+			}
+		}
+
+
 	}
 
 	public function creaFactura(){
@@ -93,37 +207,5 @@ class Facturas extends CI_Controller {
 			}	
 	}
 
-	public function condiciones(){
-		$this->load->model('Condicionespago_model');
-		$res=$this->Condicionespago_model->todos();
-		echo json_encode($res->result());
-	}
-
-	public function metodos(){
-		$this->load->model('MetodosPago_model');
-		$res=$this->MetodosPago_model->todos();
-		echo json_encode($res->result());
-	}
-
-	public function inicializaFactura(){
-
-		$this->load->model('Folios_model');
-		$folios=$this->Folios_model->foliosDisponibles();
-		$a=$folios->result();
-		
-		echo json_encode($a[0]);
-
-		$this->Folios_model->id=$a[0]->id;
-		$this->Folios_model->serie=$a[0]->serie;
-		$this->Folios_model->folio=$a[0]->folio;
-		$this->Folios_model->blockfolios=$a[0]->blockfolios;
-		$this->Folios_model->ocupado=1;	
-
-		//$this->Folios_model->actualiza();	
-
-		$this->load->model('Facturas_model');
-		$this->Facturas_model->folio=$a[0]->id;
-		$this->Facturas_model->estatus=0;	
-		//$this->Facturas_model->guarda();	
-	}
+	
 }

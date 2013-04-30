@@ -26,14 +26,10 @@ class Facturas_model extends CI_Model {
 
 	}
 
-	public function obtiene(){
+	public function obtiene($folio){
 
-		/**$this->db->select('ClienteDocumento.rfc,Folios.serie,Folios.folio');
-		$this->db->from('Facturas');
-		$this->db->join('ClienteDocumento', 'Facturas.cliente = ClienteDocumento.id', 'inner');
-		$this->db->join('Folios', 'Facturas.folio = Folios.id', 'inner');
-		$this->db->where('Field / comparison', $Value);
-		return $this->db->get('Facturas');**/
+		$this->db->where('folio', $folio);
+		return $this->db->get('Facturas');
 
 	}
 

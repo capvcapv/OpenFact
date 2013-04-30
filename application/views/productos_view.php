@@ -21,7 +21,7 @@
           modal: true,
           buttons:{
             "Crear":function(){
-              $.post('<?php echo base_url()?>index.php/productos/guarda',{codigo:$('#codigo').val(),nombre:$('#nombre').val(),descripcion:$('#descripcion').val(),precio1:$('#precio1').val(),precio2:$('#precio2').val(),unidad:$('#unidad').val(),porcentajeIVA:$('#porcentajeIVA').val(),porcentajeIEPS:$('#porcentajeIEPS').val(),porcentajeRetISR:$('#porcentajeRetISR').val(),porcentajeRetIVA:$('#porcentajeRetIVA').val()},function() {
+              $.post('<?php echo base_url()?>index.php/productos/guarda',{codigo:$('#codigo').val(),nombre:$('#nombre').val(),descripcion:$('#descripcion').val(),precio1:$('#precio1').val(),precio2:$('#precio2').val(),unidad:$('#unidad').val(),exento:chk($('#exento')),porcentajeIVA:$('#porcentajeIVA').val(),porcentajeIEPS:$('#porcentajeIEPS').val(),porcentajeRetISR:$('#porcentajeRetISR').val(),porcentajeRetIVA:$('#porcentajeRetIVA').val()},function() {
                   poblarTabla();
                 });
               $(this).dialog('close');
@@ -39,7 +39,7 @@
           modal: true,
           buttons:{
             "Guardar":function(){
-              $.post('<?php echo base_url()?>index.php/productos/actualiza',{id:$('#idActualiza').html(),codigo:$('#codigoActualiza').val(),nombre:$('#nombreActualiza').val(),descripcion:$('#descripcionActualiza').val(),precio1:$('#precio1Actualiza').val(),precio2:$('#precio2Actualiza').val(),unidad:$('#unidadActualiza').val(),porcentajeIVA:$('#porcentajeIVAActualiza').val(),porcentajeIEPS:$('#porcentajeIEPSActualiza').val(),porcentajeRetISR:$('#porcentajeRetISRActualiza').val(),porcentajeRetIVA:$('#porcentajeRetIVAActualiza').val()},function() {
+              $.post('<?php echo base_url()?>index.php/productos/actualiza',{id:$('#idActualiza').html(),codigo:$('#codigoActualiza').val(),nombre:$('#nombreActualiza').val(),descripcion:$('#descripcionActualiza').val(),precio1:$('#precio1Actualiza').val(),precio2:$('#precio2Actualiza').val(),unidad:$('#unidadActualiza').val(),exento:chk($('#exentoActualiza')),porcentajeIVA:$('#porcentajeIVAActualiza').val(),porcentajeIEPS:$('#porcentajeIEPSActualiza').val(),porcentajeRetISR:$('#porcentajeRetISRActualiza').val(),porcentajeRetIVA:$('#porcentajeRetIVAActualiza').val()},function() {
                   poblarTabla();
                 });
               $(this).dialog('close');
@@ -77,6 +77,9 @@
               $('#precio1Actualiza').val(val['precio1']);
               $('#precio2Actualiza').val(val['precio2']);
               $('#unidadActualiza').val(val['unidad']);
+              if(val['exento']==1){
+                $('#exentoActualiza').attr('checked',true);
+              }
               $('#porcentajeIVAActualiza').val(val['porcentajeIVA']);
               $('#porcentajeIEPSActualiza').val(val['porcentajeIEPS']);
               $('#porcentajeRetIVAActualiza').val(val['porcentajeRetIVA']);
@@ -110,6 +113,15 @@
         function limpiaFormulario(){
           $('#idActualiza').empty();
           $('input:text').val('');
+          $(':checkbox').attr('checked',false);
+        }
+
+        function chk(check){
+          if(check.is(':checked')){
+            return 1;
+          }else{
+            return 0;
+          }
         }
     }); 
 
@@ -166,6 +178,7 @@
         <input type="text" name="precio1" id="precio1" class="text ui-widget-content ui-corner-all" />
         <label for="precio2">Precio 2</label>
         <input type="text" name="precio2" id="precio2" class="text ui-widget-content ui-corner-all" />
+        <input type="checkbox" id="exento" value="1">Exento <br> <br>
         <label for="porcentajeIVA">IVA</label>
         <input type="text" name="porcentajeIVA" id="porcentajeIVA" class="text ui-widget-content ui-corner-all" />
         <label for="porcentajeIEPS">IEPS</label>
@@ -196,6 +209,7 @@
         <input type="text" name="precio1Actualiza" id="precio1Actualiza" class="text ui-widget-content ui-corner-all" />
         <label for="precio2Actualiza">Precio 2</label>
         <input type="text" name="precio2Actualiza" id="precio2Actualiza" class="text ui-widget-content ui-corner-all" />
+        <input type="checkbox" id="exentoActualiza" value="1">Exento  <br>  <br>    
         <label for="porcentajeIVAActualiza">IVA</label>
         <input type="text" name="porcentajeIVAActualiza" id="porcentajeIVAActualiza" class="text ui-widget-content ui-corner-all" />
         <label for="porcentajeIEPSActualiza">IEPS</label>

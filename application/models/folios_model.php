@@ -21,8 +21,9 @@ class Folios_model extends CI_Model {
 			$this->db->delete('Folios');
 		}
 		
-		public function obtener($pBlock){
-			$this->db->where('blockfolios', $pBlock);
+		public function obtener($serie,$folio){
+			$this->db->where('serie', $serie);
+			$this->db->where('folio', $folio);
 			return $this->db->get('Folios');	
 		}
 
