@@ -38,40 +38,41 @@
     
     <div class="ui-widget" id='encabezadoFactura'>
       <h3>Datos Generales</h3>
+      <label>Fecha:</label>
+      <input type='text' id='fecha'/> <br>
       <label>Cliente:</label><br>
-      <input id='buscaCliente'/><button id='nuevoCliente'>Nuevo Cliente</button>
+      <input type='text' id='buscaCliente'/><button id='nuevoCliente'>Nuevo Cliente</button>
       <br><br>
       <div id='domicilio'>
         Datos de la empresa:
       </div>
       <br>
       <label>Lugar de expedición:</label><br>
-      <input id='lugarExpedicion'/><button id='nuevoSucursal'>Nueva Sucursal</button> <br>
+      <input type='text' id='lugarExpedicion'/><button id='nuevoSucursal'>Nueva Sucursal</button> <br>
       <label>Método de pago:</label><br>
       <select id='metodoPago'></select><br>
       <label>Condiciones de pago:</label><br>
       <select id='condicionesPago'></select> 
       <label>Num. de cuenta:</label>
-      <input id='numCuenta'/><br><br>
+      <input type='text' id='numCuenta'/><br><br>
    </div>
 
-   <div id='folios'>
+   <div id='folios'class='seccion'>
     <table>
       <tr><th>Serie</th><th id='serie'></th></tr>
       <tr><th>Folio</th><th id='folio'></th></tr>
     </table>
-    
    </div>
 
     <div id='movimientos_fact' class='ui-widget'>
 
-        <div id="capturaMov">
+        <div id="capturaMov" class='seccion'>
           <h3>Movimientos</h3>
           <label>Nombre:</label>
           <input type='text' id='nombreProducto'/>
           <label>Cantidad:</label>
-          <input type="number" id="cantidadProducto" value='1'> <br>
-          <label id='detalleMov'> </label>   <br>
+          <input type='text' id="cantidadProducto" value='1'>
+          <label id='detalleMov'> </label><br><br>
           <button id="agregarMovimiento">Agregar Movimiento</button> <br>      
         </div>
 
@@ -79,30 +80,31 @@
         <thead>
           <tr class="ui-widget-header ">
             <th width='10'>Codigo</th>
-            <th width='50%'>Producto</th>
+            <th width='30%'>Producto</th>
             <th width='10%'>Cantidad</th>
             <th width='10%'>Precio Unitario</th>
+            <th width='10%'>Subtotal</th>
+            <th width='10%'>IVA</th>
             <th width='10%'>Total</th>
             <th width='10%'></th>
           </tr>
         </thead>
         <tbody id='movimientos'>
           <!--<tr>
-            <th width='10%'><input type='text'/></th>
-            <th width='30%'><input type='text'/></th>
-            <th width='10%'></th>
-            <th width='10%' ></th>
-            <th width='10%'></th>
-            <th width='10%'></th>
-            <th width='10%'></th>
-            <th width='10%'></th>
-            <th width='10%'><a href='#'>Eliminar</a></th>
+            <th width='10%' class='codigo'></th>
+            <th width='30%' class='nombre'></th>
+            <th width='10%' class='cantidad'></th>
+            <th width='10%' class='precioUnitario' ></th>
+            <th width='10%' class='subtotal'></th>
+            <th width='10%' class='iva'></th>
+            <th width='10%' class='total'></th>
+            <th width='10%' class='eliminar'>Eliminar</th>
           </tr>-->
         </tbody>
       </table> 
     </div>
     
-    <div class='detalleFactura'>
+    <div class='detalleFactura seccion'>
       <table id='impuestos'>
         <tr><th>Subtotal</th><th id='subtotal'>0.00</th></tr>
         <tr><th>IVA</th><th id='iva'>0.00</th></tr>

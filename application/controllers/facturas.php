@@ -26,10 +26,10 @@ class Facturas extends CI_Controller {
 	}
 
 	/**
-	* Funcion que inicializa la factura en base a los parametros 
-	* si no se le dan los parametros este inicializa una nueva factura 
-	* el argumento debe ser la serie y folio del documento en caso de 
-	* retomar algun documento. 
+	 Funcion que inicializa la factura en base a los parametros 
+	 si no se le dan los parametros este inicializa una nueva factura 
+	 el argumento debe ser la serie y folio del documento en caso de 
+	 retomar algun documento. 
 	**/
 
 	public function inicializaFactura($serie='',$folio=0){
@@ -75,10 +75,15 @@ class Facturas extends CI_Controller {
 
 			
 	}
-
+	/**
+		Funcion que guarda en base a dos JSON enviados por el metodo POST
+		los datos de un documento el documento ya debe ser creado por el 
+		metodo inicializaFactura este metodo lo unico que hace es actualizar
+		la informacion de la factura.
+	**/
 	public function guardaFactura(){
 
-
+		
 	}
 
 	public function terminaFactura(){

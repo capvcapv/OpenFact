@@ -1,10 +1,22 @@
 
 var codigoCliente='';
 var codigoProducto='';
-var precioUni=0;
-var iva=0;
-var subtotal=0;
-var total=0;
+var precioUni=0.0;
+var iva=0.0;
+var subtotal=0.0;
+var total=0.0;
+
+
+var Documento=function(){
+
+  this.subtotal=0.0;
+  this.iva=0.0;
+  this.total=0.0;
+
+}
+
+var docto=new Documento();
+
 
 function inicializaFactura(url){
 
@@ -22,12 +34,18 @@ function abreFactura(url){
 }
 
 function inicializaEventos(url){
+
+  $('#capturaMov').hide();
+
+  $('#fecha').datepicker();
+
+  $('#fecha').datepicker('option','dateFormat','yy-mm-dd');
   
   $('#atras').button({icons:{primary: "ui-icon-closethick"}}).click(function(){
     location.href=url+'index.php/openfact'
   });
       
-  $('#terminar').button({icons:{primary: "ui-icon-check"}});
+  $('#terminar').button({icons:{primary: "ui-icon-document"}});
       
   $('#guardar').button({icons:{primary: "ui-icon-check"}});
 
@@ -46,13 +64,13 @@ function inicializaEventos(url){
   });
 
   $('#movimientos').on('click','tr',function(event){
-        
+          
          if($(event.target).attr('class')=='eliminar'){
-          $(this).remove(); 
+          
+          restaMovimiento(parseFloat($(this).find('.subtotal').html()),parseFloat($(this).find('.iva').html()),parseFloat($(this).find('.total').html()));
+          $(this).remove();
          }
-
   });
-
 
   $('#nombreProducto').autocomplete({
     source:function(request,response){
@@ -85,11 +103,35 @@ function inicializaEventos(url){
               return data;
             }
            }).responseText;
+
            iva=subtotal*(parseFloat(data)/100);
-           
-           $('#detalleMov').html('Precio Unitario: '+precioUni+' Subtotal: '+subtotal+' IVA: '+iva+' Total:'+parseFloat(subtotal+iva));
+           total=subtotal+iva;
+
+           $('#detalleMov').html('Precio Unitario: '+precioUni+' Subtotal: '+subtotal+' IVA: '+iva+' Total:'+total);
       })
     }
+  });
+
+  $('#cantidadProducto').on('keyup',function(){
+
+          subtotal=precioUni*parseFloat($('#cantidadProducto').val());
+
+           var data=$.ajax({
+            type:'get',
+            url:url+'index.php/facturas/iva/'+codigoProducto+'/'+codigoCliente,
+            dataType:'html',
+            global:false,
+            async:false,
+            success:function(data){
+              return data;
+            }
+           }).responseText;
+
+           iva=subtotal*(parseFloat(data)/100);
+           total=subtotal+iva;
+
+           $('#detalleMov').empty();
+           $('#detalleMov').html('Precio Unitario: '+precioUni+' Subtotal: '+subtotal+' IVA: '+iva+' Total:'+total);
   });
 
 }
@@ -165,12 +207,13 @@ function cargaDatos(url){
       },
       minLength:2,
       select:function(event,ui){
-        $.getJSON(url+'index.php/clientes/cliente/'+$('#buscaCliente').val(),function(data){
+        $.getJSON(url+'index.php/clientes/cliente/'+ui.item.value,function(data){
             $.each(data,function(key,val){
               idCliente=$('#buscaCliente').val();
               $('#buscaCliente').val(val['razonSocial']);
               $('#domicilio').empty().append('Datos del cliente:<br>'+val['razonSocial']+'<br>'+val['rfc']+'<br>'+val['calle']+' N° '+val['numExt']+' '+val['numInt']+'<br>'+val['colonia']+' '+val['municipio']+' '+val['estado']);
               codigoCliente=val['id'];
+              $('#capturaMov').show("slow");
             });
         });
       }
@@ -188,7 +231,7 @@ function cargaDatos(url){
           });
         },
         select:function(event,ui){
-          $.getJSON(url+'index.php/sucursales/sucursal/'+$('#lugarExpedicion').val(),function(data){
+          $.getJSON(url+'index.php/sucursales/sucursal/'+ui.item.value,function(data){
             $.each(data,function(key,val){
                 $('#lugarExpedicion').val(val['domicilio']);        
             });
@@ -201,36 +244,49 @@ function cargaDatos(url){
 
 function agregarMovimiento(url){
   
-  $('#movimientos').append("<tr><th width='10%'><input disabled='disabled' class='codigo' type='text'/></th><th width='50%'><input class='movimiento' style='width:100%' type='text'/></th><th width='10%'><input class='cantidad' type='number' value='1'/></th><th class='unitario' width='10%'></th><th class='total' width='10%'></th><th class='eliminar' width='10%'>Eliminar</th> </tr>");
-  var tProducto=$('#movimientos').find('tr:last .movimiento');
-  var tCantidad=$('#movimientos').find('tr:last .cantidad');
-  var tTotal=$('#movimientos').find('tr:last .total');
-  var tUnitario=$('#movimientos').find('tr:last .unitario');
-  var tCodigo=$('#movimientos').find('tr:last .codigo');
+  $('#movimientos').append("<tr><th width='10%' class='codigo'>"+codigoProducto+"</th><th width='30%' class='nombre'>"+$('#nombreProducto').val()+"</th><th width='10%' class='cantidad'>"+$('#cantidadProducto').val()+"</th><th width='10%' class='precioUnitario'>"+precioUni+"</th><th width='10%' class='subtotal'>"+subtotal+"</th><th width='10%' class='iva'>"+iva+"</th><th width='10%' class='total'>"+total+"</th><th width='10%' class='eliminar'>Eliminar</th></tr>");
   
-  tCantidad.on('keyup',function(){
-    tTotal.html(tCantidad.val()*tUnitario.html());
-    sumaMovimiento();
-  });
+  sumaMovimiento(subtotal,iva,total);
+  limpiaMovimiento();
         
 }
 
-function sumaMovimiento(iva,neto){
+function sumaMovimiento(pSubtotal,pIva,pTotal){
+  
+  docto.subtotal=((docto.subtotal*100)+(pSubtotal*100))/100;
+  docto.iva=((docto.iva*100)+(pIva*100))/100;
+  docto.total=((docto.total*100)+(pTotal*100))/100;
 
-  var a=$('.total');
-  var b=0;
+  $('#subtotal').empty().html(docto.subtotal);
+  $('#iva').empty().html(docto.iva);
+  $('#total').empty().html(docto.total);
 
-  for (var i = a.length - 1; i >= 0; i--) {
-    b=parseFloat(b)+parseFloat($(a[i]).html());
-  }
+}
 
-  $('#subtotal').empty().html(b);
+function restaMovimiento(pSubtotal,pIva,pTotal){
 
+  docto.subtotal=((docto.subtotal*100)-(pSubtotal*100))/100;
+  docto.iva=((docto.iva*100)-(pIva*100))/100;
+  docto.total=((docto.total*100)-(pTotal*100))/100;
+
+  $('#subtotal').empty().html(docto.subtotal);
+  $('#iva').empty().html(docto.iva);
+  $('#total').empty().html(docto.total);
 }
 
 function limpiaFormulario(){
     
     $('#formulario input:text').val('');
     $('#formularioSucursal input:text').val('');
+}
+
+function limpiaMovimiento(){
+  subtotal=0.0;
+  iva=0.0;
+  total=0.0;
+  codigoProducto='';
+  $('#nombreProducto').val("");
+  $('#cantidadProducto').val("1");
+  $('#detalleMov').empty();
 }
 
